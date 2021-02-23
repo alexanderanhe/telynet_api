@@ -4,6 +4,11 @@ const cors = require('cors')
 
 const app = express();
 
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
+}
+console.log(process.ENV)
+
 // settings
 app.set('port', process.env.PORT || 3000);
 

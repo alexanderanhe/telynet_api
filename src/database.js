@@ -5,6 +5,7 @@ const mysqlConnection = mysql.createConnection({
   user: process.env.DB_USER || 'root',
   password: process.env.DB_PWD || 'root',
   database: process.env.DB_NAME || 'dev.test',
+  port: process.env.DB_PORT || 3306,
   multipleStatements: true
 });
 
