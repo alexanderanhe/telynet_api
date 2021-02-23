@@ -14,7 +14,7 @@ mysqlConnection.connect(function (err) {
     console.error('Error to connect database', err);
     return;
   } else {
-    console.log('db is connected');
+    console.log('db is connected on port');
   }
 });
 
