@@ -12,9 +12,10 @@ const mysqlConnection = mysql.createConnection({
 mysqlConnection.connect(function (err) {
   if (err) {
     console.error('Error to connect database', err);
+    mysqlConnection.destroy()
     return;
   } else {
-    console.log('db is connected on port');
+    console.log('db is connected');
   }
 });
 
