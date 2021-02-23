@@ -1,6 +1,6 @@
 const mysql = require('mysql');
 
-const mysqlConnection = mysql.createConnection({
+const pool = mysql.createPool({
   host: process.env.DB_HOST || 'db',
   user: process.env.DB_USER || 'root',
   password: process.env.DB_PWD || 'root',
@@ -9,14 +9,14 @@ const mysqlConnection = mysql.createConnection({
   multipleStatements: true
 });
 
-mysqlConnection.connect(function (err) {
-  if (err) {
-    console.error('Error to connect database', err);
-    // mysqlConnection.destroy()
-    return;
-  } else {
-    console.log('db is connected');
-  }
+pool.on('enqueue', function () {
+  console.log('Waiting for available connection slot');
 });
 
-module.exports = mysqlConnection;
+pool.getConnection(function(err, connection) {
+  if (err) throw err; // not connected!
+  // Use the connection
+  console.log('db is connected');
+});
+
+module.exports = pool;
